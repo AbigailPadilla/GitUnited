@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+        crossorigin="anonymous"></script>
+    <style>
+        * {box-sizing: border-box}
+
+/* Set height of body and the document to 100% */
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: Arial;
+}
+
+/* Style tab links */
+.tablink {
+    background-color: #555;    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 10px 16px;
+    font-size: 17px;
+    width: 25%;
+}
+
+.tablink:hover {
+    background-color: #777;
+}
+
+/* Style the tab content (and add height:100% for full page content) */
+.tabcontent {
+
+    display: none;
+    padding: 50px 20px;
+    height: 100%;
+}
+
+#Home {background-color: none;}
+#Gifs {background-color: none;}
+#Map {background-color: none;}
+#Music {background-color:none;}
+</style>
+</head>
+
+<body>
+
+    <button class="tablink" onclick="openPage('Home', this)" id="defaultOpen">Home</button>
+    <button class="tablink" onclick="openPage('Gifs', this)">Gifs</button>
+    <button class="tablink" onclick="openPage('Map', this)">Map</button>
+    <button class="tablink" onclick="openPage('Music', this)">Music</button>
+
+    <div id="Home" class="tabcontent">
+        <h3>For stressed UCSDBootcamp students by stressed UCSDBootcamp students</h3>
+        <img src="./assets/group.jpg" style="width:100%">
+        <a href=""> Home </a>
+    </div>
+
+    <div id="Gifs" class="tabcontent">
+        <h3>Gifs</h3>
+        <p>Cheer up with a GIF!</p>
+
+        <div class="container">
+            <div id="allbuttons" class="row"></div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div id="mainimages" class="col-6">
+                </div>
+
+                <form id="inputform">
+                    <label for="item-input" id="addtext"></label>
+                    <br>
+                    <input id="userinput" class="form-control" type="text">
+                    <br>
+                    <br>
+                    <input id="addbutton" class="btn btn-dark" type="submit" value=Submit>
+                </form>
+
+            </div>
+        </div>
+        <a href="./gifs.html"></a>
+    </div>
+
+    <div id="Map" class="tabcontent">
+        <h3>Maps</h3>
+        <p>Check traffic and directions to class</p>
+        <a href=""> |</a>
+    </div>
+
+    <div id="Music" class="tabcontent">
+        <h3>Music</h3>
+        <p>Relax with some tunes</p>
+        <a href=""> |</a>
+    </div>
+
+
+
+    <script>
+        function openPage(pageName, elmnt, color) {
+            // if (pageName === "Gifs")    {
+            //    window.location = "./gifs.html";
+            // }
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablink");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].style.backgroundColor = "";
+            }
+            document.getElementById(pageName).style.display = "block";
+            elmnt.style.backgroundColor = color;
+
+        }
+        // Get the element with id="defaultOpen" and click on it
+        document.getElementById("defaultOpen").click();
+
+        /// JS for GIF 
+        var myData = ["typing", "coding", "computer"];
+
+        $(document).ready(function () {
+            renderButton();
+            function renderButton() {
+                $("#allbuttons").empty();
+
+                for (var i = 0; i < myData.length; i++) {
+
+                    var newButton = $("<button>");
+                    newButton.addClass("itembutton");
+                    newButton.addClass("btn btn-success");
+                    newButton.text(myData[i]);
+                    newButton.attr("data-name", myData[i]);
+                    $("#allbuttons").append(newButton);
+
+                }
+
+            }
+
+
+            $("#addbutton").on("click", function (event) {
+
+                event.preventDefault();
+                var addedData = $("#userinput").val().trim();
+                if (addedData != "") {
+                    myData.push(addedData);
+                    renderButton();
+                    $("#userinput").val(" ");
+                }
+
+            });
+
+            $(document).on("click", ".itembutton", displayInfo);
+
+
+            function displayInfo() {
+                var itemName = $(this).attr("data-name");
+                var queryURL = "https://api.giphy.com/v1/gifs/search?q=computer+" + itemName + "&rating=pg13&limit=10&api_key=XHxrsTbxpYoWc4EMM61SsHn246uMSiRH";
+                $("#mainimages").empty();
+
+                $.ajax({
+                    url: queryURL,
+                    method: "GET"
+                }).then(function (response) {
+                    console.log(response);
+
+                    var results = response.data;
+
+                    for (var i = 0; i < results.length; i++) {
+
+                        var dataImage = $("<img>");
+                        dataImage.attr("src", results[i].images.fixed_height_still.url);
+                        dataImage.attr("data-still", results[i].images.fixed_height_still.url);
+                        dataImage.attr("data-animate", results[i].images.fixed_height.url);
+                        dataImage.addClass("gif");
+                        dataImage.attr("data-state", "still");
+
+
+                        var newItemdiv = $('<div class="newItem">');
+
+                        newItemdiv.append(dataImage);
+
+                        $("#mainimages").prepend(newItemdiv);
+                    }
+                });
+
+            }
+
+            $("#mainimages").on("click", ".gif", function () {
+                var state = $(this).attr("data-state");
+                if (state === "still") {
+                    $(this).attr("src", $(this).attr("data-animate"));
+                    $(this).attr("data-state", "animate");
+                }
+
+                else if (state === "animate") {
+                    $(this).attr("src", $(this).attr("data-still"));
+                    $(this).attr("data-state", "still");
+                }
+
+            });
+
+        })
+    </script>
+
+</body>
+
+</html>
