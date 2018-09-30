@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<<<<<<< HEAD
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -70,7 +69,7 @@ body, html {
 <div id="Music" class="tabcontent">
   <h3>Music</h3>
   <p>Relax with some tunes</p>
-  <a href=""> |</a>
+  <a href="./music.html"> |</a>
 </div>
 
 <script>
@@ -94,18 +93,48 @@ function openPage(pageName,elmnt,color) {
 }
 // Get the element with id="defaultOpen" and click on it
 document.getElementById("defaultOpen").click();
+
+// Radio Player 
+$(document).ready(function(){
+		$("#controlers input").attr('disabled', true);
+		$("#slider_seek").click(function(evt,arg){
+			var left = evt.offsetX;
+			DZ.player.seek((evt.offsetX/$(this).width()) * 100);
+		});
+	});
+	function event_listener_append() {
+		var pre = document.getElementById('event_listener');
+		var line = [];
+		for (var i = 0; i < arguments.length; i++) {
+			line.push(arguments[i]);
+		}
+		pre.innerHTML += line.join(' ') + "\n";
+	}
+	function onPlayerLoaded() {
+		$("#controlers input").attr('disabled', false);
+		event_listener_append('player_loaded');
+		DZ.Event.subscribe('current_track', function(arg){
+			event_listener_append('current_track', arg.index, arg.track.title, arg.track.album.title);
+		});
+		DZ.Event.subscribe('player_position', function(arg){
+			event_listener_append('position', arg[0], arg[1]);
+			$("#slider_seek").find('.bar').css('width', (100*arg[0]/arg[1]) + '%');
+		});
+	}
+	DZ.init({
+		appId  : '8',
+		channelUrl : 'http://developers.deezer.com/examples/channel.php',
+		player : {
+			container : 'player',
+			cover : true,
+			playlist : true,
+			width : 650,
+			height : 300,
+			onload : onPlayerLoaded
+		}
+	});
 </script>
      
 </body>
 </html> 
-=======
-<html lang="en">
-<head>
-	<meta charset="utf-8" />
-	<title>Git United</title>
-</head>
-<body>
-Generic HTML file.
-</body>
-</html>
->>>>>>> 5cedb82bc03f4e6e3ebadd97faa16c81b41361a9
+
