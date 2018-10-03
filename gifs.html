@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:500|Heebo:300|Montserrat+Alternates:regular" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="http://cdn-files.deezer.com/js/min/dz-v00202681.js"></script>
+
+    <!-- CSS styles -->
+    <style>
+    *{box-sizing: border-box}
+
+    /* Set height of body and the document to 100% */
+    body, html {
+    height: 100%;
+    margin: 0;
+    font-family: "Montserrat Alternates";
+    font-weight: normal;
+    font-style: normal;}
+
+    /* Style tab links */
+    .tablink {
+    background-color: #555;    float: left;
+    color: white;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 10px 16px;
+    font-size: 17px;
+    width: 25%;
+    }
+
+    .tablink:hover {
+    background-color: #777;
+    }
+
+    /* Style the tab content (and add height:100% for full page content) */
+    .tabcontent {
+    display: none;
+    padding: 50px 20px;
+    height: 100%;
+    }
+
+    #Home {
+        background-image: url("./assets/group.jpg");
+        background-size: cover;
+        height: 100%;
+        
+    }
+    #Gifs {
+       background-color: none;
+    }
+    #Map {background-color: none;}
+    #Music {
+    background-image: url("./assets/headphones.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+    }
+
+    /* Font */
+    h1{
+    font-family: "Montserrat";
+    font-weight: 500;
+    font-style: normal;
+    text-align: center;
+    }
+
+    h2, h3, h4, p {
+    font-family: "Heebo";
+    font-weight: 300;
+    font-style: normal;
+    text-align: center;
+}
+
+.jumbotron {
+    margin: auto 0;
+    padding: 0.0em 0.1em;
+
+}
+
+ /* Responsive  */
+
+ @media screen and (max-width: 980px) {
+    .tabcontent , .tablink , .jumbotron{
+    width: 100%;
+  }
+  
+  #Home , #Music  {
+   width: 100%;
+   height: 100%;
+  }
+  .jumbotron {
+    width: 100%;
+    height: 100%
+    
+  }
+  
+}
+
+@media screen and (max-width: 768px) {
+  
+    .tabcontent , .tablink , .jumbotron{
+    width: 100%;
+  }
+  
+  #Home , #Music  {
+   width: 100%;
+   height: 100%;
+  }
+  .jumbotron {
+    width: 60%;
+    height:50%
+  }
+}
+
+
+@media screen and (max-width: 640) {
+  .tabcontent , .tablink , {
+    width: 100%;
+  }
+  
+  #Home , #Music {
+   width: 25%;
+   height: 50%;
+  }
+  .jumbotron {
+    width: auto;
+    height: auto;
+    font-size: 15px;
+
+  }
+
+  #controlers {
+      width: 5px;
+
+  }
+}
+    </style>
+
+</head>
+
+<body>
+
+    <!-- Navigator Bar Tabs -->
+    <button class="tablink" onclick="openPage('Home', this)" id="defaultOpen">Home</button>
+    <button class="tablink" onclick="openPage('Gifs', this)">Gifs</button>
+    <button class="tablink" onclick="openPage('Map', this)">Map</button>
+    <button class="tablink" onclick="openPage('Music', this)">Music</button>
+
+    <!-- Home Tab Content-->
+    <div id="Home" class="tabcontent">
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <h3 class="display-4">UCSD Bootcamp</h3>
+                <p>For stressed students by stressed students</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Giphy Tab Content -->
+    <div id="Gifs" class="tabcontent">
+        <h3>Gifs</h3>
+        <p>Cheer up with a GIF!</p>
+        <div class="container">
+            <div id="allbuttons" class="row"></div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div id="mainimages" class="row">
+                </div>
+                <form id="inputform">
+                    <label for="item-input" id="addtext"></label>
+                    <br>
+                    <input id="userinput" class="form-control" type="text">
+                    <br>
+                    <br>
+                    <input id="addbutton" class="btn btn-dark" type="submit" value=Submit>
+                </form>
+            </div>
+        </div>
+        <a href=""></a>
+    </div>
+
+    <!-- Map Tab Content -->
+    <div id="Map" class="tabcontent">
+        <h3>Maps</h3>
+        <p>Check traffic and directions to class</p>
+        <a href=""> |</a>
+    </div>
+
+    <!-- Music Tab Content -->
+    <div id="Music" class="tabcontent">
+        <h3>Music</h3>
+        <p>Study with some tunes</p>
+        <div id="dz-root"></div>
+    <div id="player" style="width:100%;" align="center"></div><br/>
+    
+    <div id="controlers">
+	    <input type="button" onclick="DZ.player.playAlbum(302127); return false;" value="Play Daft Punk - Discovery"/>
+	    <input type="button" onclick="DZ.player.playAlbum(301775); return false;" value="Play Daft Punk - Homework"/>
+	  <br/>
+	    <input type="button" onclick="DZ.player.playRadio(203); return false;" value="Play Radio"/>
+	    <input type="button" onclick="DZ.player.playSmartRadio(13); return false;" value="Play Smart Radio"/>
+      <br/>
+	    <input type="button" onclick="DZ.player.play(); return false;" value="play"/>
+	    <input type="button" onclick="DZ.player.pause(); return false;" value="pause"/>
+	    <input type="button" onclick="DZ.player.prev(); return false;" value="prev"/>
+	    <input type="button" onclick="DZ.player.next(); return false;" value="next"/>
+	  <br/>
+	    <input type="button" onclick="DZ.player.setVolume(20); return false;" value="set Volume 20"/>
+	    <input type="button" onclick="DZ.player.setVolume(80); return false;" value="set Volume 80"/>
+	
+	  <br/><br/><br/>
+        </div>
+            <div id="slider_seek" class="progressbarplay" style="">
+            <div class="bar" style="width: 0%;"></div>
+        </div>
+        <a href=""> </a>
+    </div>
+
+
+    <!-- JavaScript -->
+
+    <script>
+    
+    // Page Tabs functionality 
+        function openPage(pageName, elmnt, color) {
+            // if (pageName === "Gifs")    {
+            //    window.location = "./gifs.html";
+            // }
+          var i, tabcontent, tablinks;
+          tabcontent = document.getElementsByClassName("tabcontent");
+          for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "";
+          }
+          tablinks = document.getElementsByClassName("tablink");
+          for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].style.backgroundColor = "";
+          }
+          document.getElementById(pageName).style.display = "block";
+          elmnt.style.backgroundColor = "";
+
+        }
+        // Get the element with id="defaultOpen" and click on it
+        document.getElementById("defaultOpen").click();
+
+    // JS for GIF functionality
+        var myData = ["computer", "typing", "coffee"];
+
+        $(document).ready(function () {
+          renderButton();
+            function renderButton() {
+                $("#allbuttons").empty();
+
+                for (var i = 0; i < myData.length; i++) {
+
+                    var newButton = $("<button>");
+                    newButton.addClass("itembutton");
+                    newButton.addClass("btn btn-success");
+                    newButton.text(myData[i]);
+                    newButton.attr("data-name", myData[i]);
+                    $("#allbuttons").append(newButton);
+                }
+            }
+
+
+            $("#addbutton").on("click", function (event) {
+                event.preventDefault();
+                var addedData = $("#userinput").val().trim();
+                if (addedData != "") {
+                    myData.push(addedData);
+                    renderButton();
+                    $("#userinput").val(" ");
+                }
+
+            });
+
+            $(document).on("click", ".itembutton", displayInfo);
+
+
+            function displayInfo() {
+                var itemName = $(this).attr("data-name");
+                var queryURL = "https://api.giphy.com/v1/gifs/search?q=computer+" + itemName + "&rating=pg13&limit=6&api_key=XHxrsTbxpYoWc4EMM61SsHn246uMSiRH";
+                $("#mainimages").empty();
+
+                $.ajax({
+                    url: queryURL,
+                    method: "GET"
+                }).then(function (response) {
+                    console.log(response);
+
+                    var results = response.data;
+
+                    for (var i = 0; i < results.length; i++) {
+
+                        var dataImage = $("<img>");
+                        dataImage.attr("src", results[i].images.fixed_height_still.url);
+                        dataImage.attr("data-still", results[i].images.fixed_height_still.url);
+                        dataImage.attr("data-animate", results[i].images.fixed_height.url);
+                        dataImage.addClass("gif");
+                        dataImage.attr("data-state", "still");
+
+
+                        var newItemdiv = $('<div class="newItem">');
+
+                        newItemdiv.append(dataImage);
+
+                        $("#mainimages").prepend(newItemdiv);
+                    }
+                });
+
+            }
+
+            $("#mainimages").on("click", ".gif", function () {
+                var state = $(this).attr("data-state");
+                if (state === "still") {
+                    $(this).attr("src", $(this).attr("data-animate"));
+                    $(this).attr("data-state", "animate");
+                }
+
+                else if (state === "animate") {
+                    $(this).attr("src", $(this).attr("data-still"));
+                    $(this).attr("data-state", "still");
+                }
+
+            });
+
+        })
+
+ // JS for Radio Player
+        $(document).ready(function(){
+		$("#controlers input").attr('disabled', true);
+		$("#slider_seek").click(function(evt,arg){
+			var left = evt.offsetX;
+			DZ.player.seek((evt.offsetX/$(this).width()) * 100);
+		});
+	});
+	function event_listener_append() {
+		var pre = document.getElementById('event_listener');
+		var line = [];
+		for (var i = 0; i < arguments.length; i++) {
+			line.push(arguments[i]);
+		}
+		pre.innerHTML += line.join(' ') + "\n";
+	}
+	function onPlayerLoaded() {
+		$("#controlers input").attr('disabled', false);
+		event_listener_append('player_loaded');
+		DZ.Event.subscribe('current_track', function(arg){
+			event_listener_append('current_track', arg.index, arg.track.title, arg.track.album.title);
+		});
+		DZ.Event.subscribe('player_position', function(arg){
+			event_listener_append('position', arg[0], arg[1]);
+			$("#slider_seek").find('.bar').css('width', (100*arg[0]/arg[1]) + '%');
+		});
+	}
+	DZ.init({
+		appId  : '8',
+		channelUrl : 'http://developers.deezer.com/examples/channel.php',
+		player : {
+			container : 'player',
+			cover : true,
+			playlist : true,
+			width : 350,
+			height : 300,
+			onload : onPlayerLoaded
+		}
+	});
+    
+    </script>
+
+</body>
+
+</html>
