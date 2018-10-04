@@ -53,13 +53,14 @@
         
     }
     #Gifs {
-        background: #83a4d4;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to right, #b6fbff, #83a4d4);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to right, #b6fbff, #83a4d4); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: #83a4d4;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #b6fbff, #83a4d4);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #b6fbff, #83a4d4); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
     }
     
     #Map {background-color: none;}
+
     #Music {
     background-image: url("./assets/headphones.jpg");
     background-repeat: no-repeat;
@@ -97,12 +98,7 @@ background: linear-gradient(to right, #b6fbff, #83a4d4); /* W3C, IE 10+/ Edge, F
    width: 100%;
    height: 100%;
   }
-  /* .jumbotron {
-    width: 100%;
-    height: 100%
-    
-  } */
-  
+
 }
 
 @media screen and (max-width: 768px) {
@@ -115,12 +111,8 @@ background: linear-gradient(to right, #b6fbff, #83a4d4); /* W3C, IE 10+/ Edge, F
    width: 100%;
    height: 100%;
   }
-  /* .jumbotron {
-    width: 60%;
-    height:50%
-  } */
-}
 
+}
 
 @media screen and (max-width: 640) {
   .tabcontent , .tablink , {
@@ -131,18 +123,28 @@ background: linear-gradient(to right, #b6fbff, #83a4d4); /* W3C, IE 10+/ Edge, F
    width: 25%;
    height: 50%;
   }
-  /* .jumbotron {
-    width: auto;
-    height: auto;
-    font-size: 15px;
-
-  } */
 
   #controlers {
       width: 5px;
-
   }
 }
+
+    #map {
+        height: 500px;
+        width-center: 50%; 
+    }
+
+    p {
+        text-align: center;
+    }
+
+    .center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    }
+  
     </style>
 
 </head>
@@ -193,8 +195,21 @@ background: linear-gradient(to right, #b6fbff, #83a4d4); /* W3C, IE 10+/ Edge, F
     <!-- Map Tab Content -->
     <div id="Map" class="tabcontent">
         <h3>Maps</h3>
-        <p>Check traffic and directions to class</p>
-        <a href=""> |</a>
+  
+          
+ <div id="map">   
+    </div>
+    <div>
+          <p>University City Center
+           <br>
+           6256 Greenwich Drive
+           <br>
+           San Diego, CA 92122 
+           <br></p> 
+    </div>
+    <a href="https://www.google.com/maps/place/UC+San+Diego+Extension/@32.8819067,-117.2457332,17z/data=!3m1!4b1!4m5!3m4!1s0x80dc06c4414caf4f:0xe0acf21d827fd9ef!8m2!3d32.8819067!4d-117.2435445">
+           <img src="./assets/school.png" alt="HTML tutorial" style="width: 150px " class="center">
+         </a>
     </div>
 
     <!-- Music Tab Content -->
@@ -376,6 +391,21 @@ background: linear-gradient(to right, #b6fbff, #83a4d4); /* W3C, IE 10+/ Edge, F
 		}
 	});
     
+    // JS for Maps 
+
+    function initMap() {
+        var location = {lat: 32.852760, lng: -117.183020};
+        var map = new google.maps.Map(document.getElementById("map"), {
+            zoom: 10,
+            center: location
+        });
+        var marker = new google.maps.Marker({
+            position: location,
+            map: map
+        });
+    }
+</script>
+<script async defer src= "https://maps.googleapis.com/maps/api/js?key=AIzaSyANFwAMfnyZN_TFxlsj-2yMxwcmmjKKCP4&callback=initMap"></script>
     </script>
 
 </body>

@@ -9,14 +9,37 @@
     }
     #map {
         height: 500px;
-        width-center: 50%;
+        width-center: 50%; 
     }
+
+    p {
+        text-align: center;
+    }
+
+ .center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+  
 </style>
 </head>
 <body>
-       
-
-<div id="map"></div>
+   
+ <div id="map">   
+ </div>
+ <div>
+       <p>University City Center
+        <br>
+        6256 Greenwich Drive
+        <br>
+        San Diego, CA 92122 
+        <br></p> 
+ </div>
+ <a href="https://www.google.com/maps/place/UC+San+Diego+Extension/@32.8819067,-117.2457332,17z/data=!3m1!4b1!4m5!3m4!1s0x80dc06c4414caf4f:0xe0acf21d827fd9ef!8m2!3d32.8819067!4d-117.2435445">
+        <img src="./assets/school.png" alt="HTML tutorial" style="width: 150px " class="center">
+      </a>
 
 <script>
     function initMap() {
@@ -34,4 +57,4 @@
 <script async defer src= "https://maps.googleapis.com/maps/api/js?key=AIzaSyANFwAMfnyZN_TFxlsj-2yMxwcmmjKKCP4&callback=initMap"></script>
 
 </body>
-</html>
+</html> 
